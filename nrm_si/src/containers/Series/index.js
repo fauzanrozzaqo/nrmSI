@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import SeriesList from '../../components/SeriesList';
+
 class Series extends Component {
   state = {
     series: []
@@ -10,7 +12,12 @@ class Series extends Component {
       .then(json => this.setState({ series: json }));
   }
   render() {
-    return <div> The length of series array - {this.state.series.length}</div>;
+    return (
+    <div> 
+        The length of series array - {this.state.series.length}
+        <SeriesList list={this.state.series} />
+    </div>
+    )
   }
 }
 
