@@ -6,9 +6,9 @@ class SingleSeries extends Component{
     }
 
     componentDidMount(){
-        const { id } = this.props.match.params.id;
+        const { id } = this.props.match.params;
 
-        fetch(`http://api.tvmaze.com/shows/{id}?embed=episodes`)
+        fetch(`http://api.tvmaze.com/shows/${id}?embed=episodes`)
           .then(response => response.json())
           .then(json => this.setState({ show: json }));
     }
@@ -19,7 +19,17 @@ class SingleSeries extends Component{
         return (
           <div>
             {show === null && <Loader />}
-            {show !== null && <p>Show has been loaded</p>}
+            {show !== null 
+            &&
+            <div>
+            <p>{show.name}</p>
+            <p>Premiered - {show.premiered}</p>
+            <p>Episodes - {show._embedded.episodes.length}</p>
+            <p>
+                <img alt="show" src={show.image.medium} />
+            </p>
+            </div>
+            }
           </div>
         );
     }
